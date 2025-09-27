@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Recipe Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">🍳 Recipe Finder</h1>
+            <p class="header__subtitle">Discover delicious recipes with your available ingredients</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Ingredient Input Section -->
+            <section class="ingredient-section">
+                <div class="ingredient-input-container">
+                    <h2>What ingredients do you have?</h2>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="ingredient-input" 
+                            class="form-control ingredient-input" 
+                            placeholder="Enter an ingredient (e.g., tomatoes, chicken, cheese)"
+                            maxlength="50"
+                        >
+                        <button type="button" id="add-ingredient-btn" class="btn btn--primary">
+                            Add Ingredient
+                        </button>
+                    </div>
+                    
+                    <!-- Popular Ingredients -->
+                    <div class="popular-ingredients">
+                        <h3>Popular Ingredients</h3>
+                        <div class="ingredient-suggestions" id="ingredient-suggestions">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Selected Ingredients -->
+                    <div class="selected-ingredients" id="selected-ingredients-container" style="display: none;">
+                        <h3>Selected Ingredients</h3>
+                        <div class="ingredient-tags" id="ingredient-tags"></div>
+                        <div class="ingredient-actions">
+                            <button type="button" id="find-recipes-btn" class="btn btn--primary btn--lg">
+                                Find Recipes
+                            </button>
+                            <button type="button" id="clear-ingredients-btn" class="btn btn--outline">
+                                Clear All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <div class="loading-container hidden" id="loading-container">
+                <div class="loading-spinner"></div>
+                <p>Searching for delicious recipes...</p>
+            </div>
+
+            <!-- Recipe Results -->
+            <section class="recipe-results" id="recipe-results" style="display: none;">
+                <div class="results-header">
+                    <h2 id="results-title">Found Recipes</h2>
+                    <div class="results-filters">
+                        <select id="sort-select" class="form-control">
+                            <option value="match">Best Match</option>
+                            <option value="time">Cooking Time</option>
+                            <option value="difficulty">Difficulty</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="recipe-grid" id="recipe-grid">
+                    <!-- Recipe cards will be populated by JavaScript -->
+                </div>
+                <div class="no-results hidden" id="no-results">
+                    <div class="no-results-content">
+                        <h3>No recipes found</h3>
+                        <p>Try different ingredients or reduce your selection to find more recipes.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Recipe Detail Modal -->
+    <div class="modal hidden" id="recipe-modal">
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title"></h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="recipe-detail">
+                    <img class="recipe-detail__image" id="modal-image" alt="">
+                    <div class="recipe-detail__info">
+                        <div class="recipe-meta">
+                            <div class="meta-item">
+                                <strong>⏱️ Time:</strong>
+                                <span id="modal-time"></span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>👨‍🍳 Difficulty:</strong>
+                                <span id="modal-difficulty"></span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>🍽️ Servings:</strong>
+                                <span id="modal-servings"></span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>🔥 Calories:</strong>
+                                <span id="modal-calories"></span>
+                            </div>
+                        </div>
+                        <div class="recipe-actions">
+                            <button class="btn btn--primary" id="favorite-btn">
+                                ❤️ Add to Favorites
+                            </button>
+                            <button class="btn btn--outline" id="share-btn">
+                                📤 Share Recipe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-sections">
+                    <div class="recipe-section">
+                        <h3>📋 Ingredients</h3>
+                        <ul class="ingredients-list" id="modal-ingredients"></ul>
+                    </div>
+                    
+                    <div class="recipe-section">
+                        <h3>👩‍🍳 Instructions</h3>
+                        <ol class="instructions-list" id="modal-instructions"></ol>
+                    </div>
+
+                    <div class="recipe-section">
+                        <h3>📊 Nutrition Facts</h3>
+                        <div class="nutrition-info" id="modal-nutrition"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
